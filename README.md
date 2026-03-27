@@ -1,12 +1,71 @@
-Ingestion:
-    Raw data was ingested from azure blob storage using fivetran connection. A connection string was given to form a connection. Data was ingested from 6 different CSV files and was mapped to 6 different tables at                azure_blob_storage which is inside deminiproject catalog.
-    
-Transformation:
-    Raw data which was ingested from the last step is cleaned and transformed for business usage. All the notebooks are stored in the silver layer of the project. Six different notebooks each for it's respective tables.          Transformation includes changing all date formats to YYYY-MM-DD, standardizing column names to snake case, removing metadata added by fivtran, handling null values and removing special characters from customer names.         After all the transformation the tables were stored in the silver layer of deminiproject catalog.
+1. Data Ingestion (Bronze Layer)
 
-Gold Layer:
-    First two notebooks were created, sales and inventory which are used to create their respective fact tables along with the dim tables. After the dim and fact tables are created and stored, another notebook named kpi is       created and used for calculating kpi which can be used to make business decisions. One final notebook is created named datacube which creates and displays two datacubes cretaed from fact_inventory and fact_sales tables       respectively.
+Raw data was ingested from Azure Blob Storage using a Fivetran connector.
 
-Orhcestration:
-    For orchestration databricks' jobs were used. Since the silver layer notebooks are transforming different tables and are independent of each other they are parallel to each other. After these tasks are completed sales and
-    inventory notebook tasks run which are again parallel to each other but dependent on the completion of the previous 5 tasks of silver layer. Once all this is done kpi task runs and in serial manner datacube task.
+A connection was established using a secure connection string
+Data was sourced from 6 CSV files
+Each file was mapped to a corresponding table in the azure_blob_storage schema
+All tables were stored under the deminiproject catalog
+Key Points:
+Automated ingestion using Fivetran
+Schema mapping for structured storage
+Raw data preserved without transformation
+
+
+
+2. Data Transformation (Silver Layer)
+
+The raw data was cleaned and standardized to make it suitable for downstream analytics.
+
+6 separate Databricks notebooks were created (one per table)
+Each notebook performs transformations independently
+Transformations Applied:
+Standardized date formats to YYYY-MM-DD
+Converted column names to snake_case
+Removed metadata columns added by Fivetran
+Handled missing/null values
+Cleaned customer names by removing special characters
+Output:
+Cleaned and transformed tables stored in the Silver layer
+Data is structured, consistent, and ready for modeling
+
+
+3. Data Modeling & Analytics (Gold Layer)
+
+The Gold layer focuses on business-level insights through fact/dimension modeling and KPI generation.
+
+Fact & Dimension Tables
+
+Two notebooks were created:
+
+Sales Notebook
+Generates fact_sales
+Creates relevant dimension tables
+Inventory Notebook
+Generates fact_inventory
+Creates supporting dimension tables
+KPI Calculation
+A dedicated KPI notebook computes key business metrics
+These KPIs support decision-making and performance analysis
+Data Cubes
+A final notebook (datacube) creates two data cubes:
+Based on fact_sales
+Based on fact_inventory
+Enables multi-dimensional analysis
+
+
+4. Orchestration
+
+Pipeline orchestration is handled using Databricks Jobs.
+
+Workflow Design:
+Silver Layer Execution
+All 6 transformation notebooks run in parallel
+Since they operate on independent datasets
+Gold Layer (Fact Table Creation)
+sales and inventory notebooks:
+Run in parallel
+Triggered only after Silver layer completion
+Final Steps
+kpi notebook runs after fact tables are ready
+datacube notebook runs sequentially after KPI
