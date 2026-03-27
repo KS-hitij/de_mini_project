@@ -69,3 +69,12 @@ Triggered only after Silver layer completion
 Final Steps
 kpi notebook runs after fact tables are ready
 datacube notebook runs sequentially after KPI
+
+Important Notes:
+
+    - In the silver layer in transform_customer notebook, there were two records with same data but the contact being different. Since the joined dates were in dates of same day and no timestamp had to delete one randomly.
+    - All the dates are formatted to YYYY-MM-DD format.
+    - Some of the record in transform_sales had INR and $ symbol but since no default currency was provided and other records had no symbol, the default currency was taken as INR and the symbols were removed.
+    - For the record with $ symbol, after checking it's other sales and product info, it was concluded that the symbol is a misprint and the currency is actually in INR with $ symbol being a mistake.
+    - In KPI many assumptions were made which are mentioned in their respective code.
+    
