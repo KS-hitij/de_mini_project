@@ -1,3 +1,13 @@
+                                        CASE STUDY: RETAIL SALES ANALYTICS MODERNIZATION (TECHNOVA)
+BUSINESS SCENARIO:
+TechNova is a regional electronics retailer with 5 physical stores. Currently, 
+their reporting is manual and done via Excel, which leads to errors and slow 
+decision-making. 
+
+GOAL: Build an automated Data Warehouse to track daily sales, inventory health, 
+and customer loyalty using a Medallion Architecture.
+
+
 1. Data Ingestion (Bronze Layer)
 
 Raw data was ingested from Azure Blob Storage using a Fivetran connector.
