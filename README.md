@@ -282,15 +282,6 @@ Customers with multiple orders (excludes "Unknown Customer"):
   * 1 datacube notebook
   * 1 KPI analytics notebook
 
-* **Data Volume**: Small sample dataset for demonstration
-  * 20 sales transactions
-  * 8 inventory records
-  * 6 customers
-  * 3 stores
-  * 10 returns (50% return rate)
-
-* **Date Range**: January 2026 (sales data from Jan 15-31, 2026)
-
 ## Technical Notes
 
 * **Table Format**: All tables use Delta format for ACID transactions
@@ -329,50 +320,6 @@ DATACUBE LAYER (datacube schema) [Denormalization]
 BI DASHBOARDS & ANALYTICS
     └── KPI calculations and visualizations
 ```
-
-## Future Enhancements
-
-### Data Pipeline
-* **Incremental Loading**: Replace full overwrites with incremental (merge/upsert) patterns
-* **Change Data Capture (CDC)**: Implement CDC from source systems
-* **Data Quality Framework**: Add comprehensive validation rules and data quality checks
-* **Error Handling**: Implement quarantine tables for bad records
-* **Schema Evolution**: Handle schema changes gracefully
-
-### Data Modeling
-* **SCD Type 2**: Implement Slowly Changing Dimensions for historical tracking
-  * Track customer address changes
-  * Track product price history
-  * Track store manager changes
-* **Additional Fact Tables**:
-  * `fact_promotions` - Track promotional campaigns
-  * `fact_shipments` - Track delivery performance
-* **Junk Dimensions**: Consolidate flags and indicators
-* **Bridge Tables**: Handle many-to-many relationships
-
-### Analytics & KPIs
-* **Time-Series Analysis**: Add date dimensions for trend analysis
-* **Customer Segmentation**: RFM analysis (Recency, Frequency, Monetary)
-* **Cohort Analysis**: Track customer behavior over time
-* **Predictive Analytics**: Forecast demand and identify churn risk
-* **Inventory Optimization**: Reorder point calculations, safety stock levels
-
-### Automation & Orchestration
-* **Scheduled Jobs**: Automate pipeline execution with Databricks workflows
-* **Monitoring & Alerting**: Set up alerts for pipeline failures and data quality issues
-* **Data Lineage Tracking**: Implement automated lineage documentation
-* **Performance Optimization**: Partition tables, optimize file sizes (Z-ORDER, OPTIMIZE)
-
-### Security & Governance
-* **Access Control**: Implement fine-grained access control (Unity Catalog)
-* **Data Masking**: Mask PII fields (customer contact info)
-* **Audit Logging**: Track data access and modifications
-* **Data Retention Policies**: Implement archival strategy
-
-### Scalability
-* **Performance Tuning**: Add table partitioning by date
-* **Caching Strategy**: Materialize frequently accessed aggregations
-* **Streaming**: Consider streaming ingestion for real-time analytics
 
 ---
 
