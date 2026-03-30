@@ -6,9 +6,7 @@ This is a multi-layer data engineering project following the **Medallion Archite
 
 * **Domain**: Retail analytics covering sales, inventory, customers, stores, products, and returns
 * **Source**: Azure Blob Storage via Fivetran
-* **Tech Stack**: Databricks, PySpark, Delta Lake
 * **Catalog**: `de_mini_project`
-* **Cloud Provider**: AWS
 
 ## Architecture & Data Pipeline
 
